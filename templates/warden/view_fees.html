@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}View Fees{% endblock %}
+{% block content %}
+    <h1>View Fees</h1>
+    {% if show_fee_update_form %}
+    <form method="POST" action="{{ url_for('warden.view_fees') }}">
+        <div class="form-group">
+            <label for="room_rent">Room Rent:</label>
+            <input type="number" id="room_rent" name="room_rent" value="{{ room_rent }}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="maintenance_cost">Maintenance Cost:</label>
+            <input type="number" id="maintenance_cost" name="maintenance_cost" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="max_mess_fees">Max Mess Fees:</label>
+            <input type="number" id="max_mess_fees" name="max_mess_fees" value="{{ max_mess_fees }}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Fees</button>
+    </form>
+    {% endif %}
+
+    <h2>Fees Due for Students for the month of {{ previous_month }}</h2>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Admission Number</th>
+                <th>Total Fee Due</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students_fees %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.admission_number }}</td>
+                    <td>{{ student.total_fee_due }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

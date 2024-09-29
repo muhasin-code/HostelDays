@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Approval Requests{% endblock %}
+{% block content %}
+    <h1>Approval Requests</h1>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Admission Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in approval_requests %}
+            <tr>
+                <td>{{ request.name }}</td>
+                <td>{{ request.admission_number }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('warden.approve_request', request_id=request.id) }}">
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('warden.deny_request', request_id=request.id) }}">
+                        <button type="submit" class="btn btn-danger">Deny</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

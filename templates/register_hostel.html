@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Register Hostel{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1 style="color: blue; font-weight: bold;">Hostel Days</h1>
+                <img src="{{ url_for('static', filename='images/registration.png') }}" alt="Registration Image" class="img-fluid">
+            </div>
+            <div class="col-sm" style="padding-top: 130px;">
+                <h1 style="color: blue; font-weight: bold; padding-left: 100px;">Register Hostel</h1>
+                <form method="post">
+                    <div class="form-group">
+                        <input placeholder="Hostel Name" autocomplete="off" type="text" id="hostel_name"name="hostel_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="Hostel Key" autocomplete="off" type="text" id="unique_id" name="unique_id" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-left: 200px;">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

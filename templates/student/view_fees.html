@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}View Fees{% endblock %}
+{% block content %}
+    <h1>View Fees</h1>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>Room Rent:</td>
+            <td>{{ room_rent }}</td>
+        </tr>
+        <tr>
+            <td>Mess Fee:</td>
+            <td>{{ mess_fee }}</td>
+        </tr>
+        <tr>
+            <td>Maintenance Fee:</td>
+            <td>{{ maintenance_fee }}</td>
+        </tr>
+        <tr>
+            <td>Total Fee Due:</td>
+            <td>{{ total_fee_due }}</td>
+        </tr>
+    </table>
+{% endblock %}

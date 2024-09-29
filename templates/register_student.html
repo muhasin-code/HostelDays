@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Register Student{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h1 style="color: blue; font-weight: bold;">Hostel Days</h1>
+            <img src="{{ url_for('static', filename='images/registration.png') }}" alt="Registration Image" class="img-fluid">
+        </div>
+        <div class="col-sm" style="padding-top: 50px;">
+            <h1 style="color: blue; font-weight: bold; padding-left: 100px;">Register Student</h1>
+            <form method="post">
+                <div class="form-group">
+                    <input placeholder="Name" autocomplete="off" type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Age" autocomplete="off" type="number" id="age" name="age" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Course" autocomplete="off" type="text" id="course" name="course" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Admission Number" autocomplete="off" type="text" id="admission_number" name="admission_number" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Hostel Key" autocomplete="off" type="text" id="hostel_key" name="hostel_key" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Username" autocomplete="off" type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Password" autocomplete="off" type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 200px;">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

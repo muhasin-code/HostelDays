@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}View Announcements{% endblock %}
+{% block content %}
+    <h1>Announcements</h1>
+    {% if announcements %}
+        <ul class="list-group">
+        {% for announcement in announcements %}
+            <li class="list-group-item">{{ announcement.announcement_text }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No announcements available.</p>
+    {% endif %}
+{% endblock %}

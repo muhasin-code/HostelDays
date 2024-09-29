@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Mark Attendance{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Mark Attendance for Tomorrow's Food</h1>
+    <form method="POST" action="{{ url_for('student.attendance') }}" class="text-center">
+        <button type="submit" name="attendance_status" value="Present" class="btn btn-success btn-lg mx-2">Present</button>
+        <button type="submit" name="attendance_status" value="Absent" class="btn btn-danger btn-lg mx-2">Absent</button>
+    </form>
+{% endblock %}

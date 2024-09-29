@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Make Announcement{% endblock %}
+{% block content %}
+    <h1>Make Announcement</h1>
+    <form method="POST" action="{{ url_for('warden.make_announcement') }}">
+        <div class="form-group">
+            <label for="announcement_text">Announcement:</label>
+            <textarea id="announcement_text" name="announcement_text" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Make Announcement</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Register Warden{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h1 style="color: blue; font-weight: bold;">Hostel Days</h1>
+            <img src="{{ url_for('static', filename='images/registration.png') }}" alt="Registration Image" class="img-fluid">
+        </div>
+        <div class="col-sm" style="padding-top: 130px;">
+            <h1 style="color: blue; font-weight: bold; padding-left: 100px;">Register Warden</h1>
+            <form method="post">
+                <div class="form-group">
+                    <input placeholder="Username" autocomplete="off" type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Hostel Key" autocomplete="off" type="text" id="unique_id" name="unique_id" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Password" type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 200px;">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

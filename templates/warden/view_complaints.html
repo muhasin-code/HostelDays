@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}View Complaints{% endblock %}
+{% block content %}
+    <h1>Complaints</h1>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Complaint</th>
+                <th>Date</th>
+                <th>Student Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint.complaint_text }}</td>
+                <td>{{ complaint.date }}</td>
+                <td>{{ complaint.student_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

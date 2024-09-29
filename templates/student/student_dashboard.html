@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+    <h1 style="margin-top: 150px; font-weight: bold; color: blue; margin-left: 170px;">Student Dashboard</h1>
+
+    <div class="container mt-5" style="justify-content: flex-start;">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{ url_for('student.attendance') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Mark Attendance</button></a>
+            </div>
+
+            <div class="col-md-6">
+                <a href="{{ url_for('student.view_announcements') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">View Announcements</button></a>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 30px;">
+            <div class="col-md-6">
+                <a href="{{ url_for('student.view_fees') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">View Fees</button></a>
+            </div>
+
+            <div class="col-md-6">
+                <a href="{{ url_for('student.register_complaint') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Register Complaints</button></a>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('user.logout') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px; margin-left: 270px; margin-top: 30px;">Logout</button></a>
+    </div>
+{% endblock %}

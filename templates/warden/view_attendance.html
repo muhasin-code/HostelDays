@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}View Attendance{% endblock %}
+{% block content %}
+    <h1>View Attendance Records</h1>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Admission Number</th>
+                <th>Attendance Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in attendance_records %}
+                <tr>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.admission_number }}</td>
+                    <td>{{ record.attendance }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

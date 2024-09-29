@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Register Complaint{% endblock %}
+{% block content %}
+    <h1>Register Complaint</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="complaint">Complaint:</label>
+            <textarea id="complaint" name="complaint" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

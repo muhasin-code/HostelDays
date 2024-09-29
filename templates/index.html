@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}HostelDays{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row align-items-center">
+        <!-- Left side with the hostel image -->
+        <div class="col-md-6 position-relative">
+            <h1 class="display-4 font-weight-bold text-primary position-left" style="top: 20px; left: 20px;">Hostel Days</h1>
+            <img src="{{ url_for('static', filename='images/hostel_image.png') }}" alt="Hostel Image" class="img-fluid">
+        </div>
+
+        <!-- Right side with the text and login button -->
+        <div class="col-md-6 text-left">
+            <nav class="nav justify-content-end">
+                <a class="nav-link" href="{{ url_for('user.register_warden') }}">Warden</a>
+                <a class="nav-link" href="{{ url_for('user.register_hostel') }}">Hostel</a>
+                <a class="nav-link" href="{{ url_for('user.register_student') }}">Student</a>
+            </nav>
+
+            <h1 class="display-4 font-weight-bold mt-5">Welcome To,</h1>
+            <h1 class="display-2 font-weight-bold text-primary">Hostel Days</h1>
+            <p class="lead">
+                Discover a seamless way to manage hostel life with Hostel Days. Whether you're a student looking to secure your place, 
+                a warden managing approvals and announcements, or a hostel administrator overseeing the day-to-day operations, 
+                our platform offers an easy-to-use interface designed to simplify every step of the process. 
+                Join us and experience efficient, organized, and hassle-free hostel management like never before.
+            </p>            
+            <a href="{{ url_for('user.login') }}" class="btn btn-primary btn-lg mt-3">Log In</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
