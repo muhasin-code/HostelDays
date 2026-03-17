@@ -1,24 +1,37 @@
 {% extends "base.html" %}
-{% block title %}Register Hostel{% endblock %}
+{% block title %}Register Hostel - HostelDays{% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <h1 style="color: blue; font-weight: bold;">Hostel Days</h1>
-                <img src="{{ url_for('static', filename='images/registration.png') }}" alt="Registration Image" class="img-fluid">
+<div style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
+    <div class="card glass" style="width: 100%; max-width: 500px; padding: 3.5rem;">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <div style="background: rgba(16, 185, 129, 0.1); width: 4rem; height: 4rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--accent);">
+                <i data-lucide="building-2" style="width: 2rem; height: 2rem;"></i>
             </div>
-            <div class="col-sm" style="padding-top: 130px;">
-                <h1 style="color: blue; font-weight: bold; padding-left: 100px;">Register Hostel</h1>
-                <form method="post">
-                    <div class="form-group">
-                        <input placeholder="Hostel Name" autocomplete="off" type="text" id="hostel_name"name="hostel_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <input placeholder="Hostel Key" autocomplete="off" type="text" id="unique_id" name="unique_id" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="margin-left: 200px;">Register</button>
-                </form>
+            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Hostel Registration</h1>
+            <p style="color: var(--text-muted);">Create a new hostel profile</p>
+        </div>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="hostel_name">Hostel Name</label>
+                <input type="text" id="hostel_name" name="hostel_name" placeholder="e.g. Sapphire Residency" required>
             </div>
+            <div class="form-group" style="margin-bottom: 2.5rem;">
+                <label for="unique_id">Hostel Unique Key</label>
+                <div style="position: relative;">
+                    <i data-lucide="key" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.25rem; height: 1.25rem; color: var(--text-muted);"></i>
+                    <input type="text" id="unique_id" name="unique_id" placeholder="Create a unique key for your hostel" style="padding-left: 3rem;" required>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">This key will be used by students and wardens to join.</p>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                Register Hostel
+            </button>
+        </form>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="{{ url_for('user.login') }}" style="color: var(--primary); text-decoration: none; font-size: 0.875rem;">Back to login</a>
         </div>
     </div>
+</div>
 {% endblock %}

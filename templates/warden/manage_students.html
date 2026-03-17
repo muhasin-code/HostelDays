@@ -1,27 +1,77 @@
-{% extends "base.html" %}
-{% block title %}Manage Students{% endblock %}
-{% block content %}
-    <h1>Manage Students</h1>
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Student Name</th>
-                <th>Admission Number</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in approved_students %}
-            <tr>
-                <td>{{ student.name }}</td>
-                <td>{{ student.admission_number }}</td>
-                <td>
-                    <form method="POST">
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% extends "dashboard_base.html" %}
+
+{% block title %}Manage Students - HostelDays{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('warden.dashboard') }}" class="nav-link">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('warden.manage_students') }}" class="nav-link active">
+    <i data-lucide="users"></i>
+    Students List
+</a>
+<a href="{{ url_for('warden.approval_requests') }}" class="nav-link">
+    <i data-lucide="user-plus"></i>
+    Approval Requests
+</a>
+<a href="{{ url_for('warden.view_attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Attendance List
+</a>
+<a href="{{ url_for('warden.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    Fees Calculation
+</a>
+<a href="{{ url_for('warden.view_complaints') }}" class="nav-link">
+    <i data-lucide="message-square-warning"></i>
+    Complaints
+</a>
+<a href="{{ url_for('warden.make_announcement') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+{% endblock %}
+
+{% block page_title %}Students List{% endblock %}
+{% block page_subtitle %}Manage approved students currently residing in the hostel.{% endblock %}
+
+{% block dashboard_content %}
+<div class="card glass">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Admission Number</th>
+                    <th style="text-align: right;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in approved_students %}
+                <tr>
+                    <td style="font-weight: 600;">{{ student.name }}</td>
+                    <td style="color: var(--text-muted); font-family: monospace;">{{ student.admission_number }}</td>
+                    <td style="text-align: right;">
+                        <form method="POST" style="display: inline;">
+                            <input type="hidden" name="student_id" value="{{ student.id }}">
+                            <button type="submit" class="btn btn-outline" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.05); padding: 0.5rem 1rem;">
+                                <i data-lucide="user-minus" style="width: 1rem;"></i>
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                        <i data-lucide="users" style="width: 3rem; height: 3rem; margin-bottom: 1rem; opacity: 0.2;"></i>
+                        <p>No students found.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

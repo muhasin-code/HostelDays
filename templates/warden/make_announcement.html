@@ -1,12 +1,55 @@
-{% extends "base.html" %}
-{% block title %}Make Announcement{% endblock %}
-{% block content %}
-    <h1>Make Announcement</h1>
+{% extends "dashboard_base.html" %}
+
+{% block title %}Make Announcement - HostelDays{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('warden.dashboard') }}" class="nav-link">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('warden.manage_students') }}" class="nav-link">
+    <i data-lucide="users"></i>
+    Students List
+</a>
+<a href="{{ url_for('warden.approval_requests') }}" class="nav-link">
+    <i data-lucide="user-plus"></i>
+    Approval Requests
+</a>
+<a href="{{ url_for('warden.view_attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Attendance List
+</a>
+<a href="{{ url_for('warden.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    Fees Calculation
+</a>
+<a href="{{ url_for('warden.view_complaints') }}" class="nav-link">
+    <i data-lucide="message-square-warning"></i>
+    Complaints
+</a>
+<a href="{{ url_for('warden.make_announcement') }}" class="nav-link active">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+{% endblock %}
+
+{% block page_title %}Post Announcement{% endblock %}
+{% block page_subtitle %}Broadcast important information to all students in the hostel.{% endblock %}
+
+{% block dashboard_content %}
+<div class="card glass" style="max-width: 700px;">
     <form method="POST" action="{{ url_for('warden.make_announcement') }}">
         <div class="form-group">
-            <label for="announcement_text">Announcement:</label>
-            <textarea id="announcement_text" name="announcement_text" class="form-control" required></textarea>
+            <label for="announcement_text">Message Content</label>
+            <textarea id="announcement_text" name="announcement_text" rows="6" placeholder="Type your announcement here..." style="resize: vertical;" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Make Announcement</button>
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem;">
+            <a href="{{ url_for('warden.dashboard') }}" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary" style="padding: 0.75rem 2rem;">
+                <i data-lucide="send" style="width: 1.125rem;"></i>
+                Post Broadcast
+            </button>
+        </div>
     </form>
+</div>
 {% endblock %}

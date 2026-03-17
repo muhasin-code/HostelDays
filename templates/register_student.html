@@ -1,38 +1,65 @@
 {% extends "base.html" %}
-{% block title %}Register Student{% endblock %}
+{% block title %}Register Student - HostelDays{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <h1 style="color: blue; font-weight: bold;">Hostel Days</h1>
-            <img src="{{ url_for('static', filename='images/registration.png') }}" alt="Registration Image" class="img-fluid">
+<div style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 2rem 0;">
+    <div class="card glass" style="width: 100%; max-width: 600px; padding: 3.5rem;">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <div style="background: rgba(79, 70, 229, 0.1); width: 4rem; height: 4rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--primary);">
+                <i data-lucide="graduation-cap" style="width: 2rem; height: 2rem;"></i>
+            </div>
+            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Student Signup</h1>
+            <p style="color: var(--text-muted);">Join your hostel community</p>
         </div>
-        <div class="col-sm" style="padding-top: 50px;">
-            <h1 style="color: blue; font-weight: bold; padding-left: 100px;">Register Student</h1>
-            <form method="post">
+
+        <form method="post">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
                 <div class="form-group">
-                    <input placeholder="Name" autocomplete="off" type="text" id="name" name="name" class="form-control" required>
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
                 </div>
                 <div class="form-group">
-                    <input placeholder="Age" autocomplete="off" type="number" id="age" name="age" class="form-control" required>
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" placeholder="20" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course</label>
+                <input type="text" id="course" name="course" placeholder="e.g. B.Tech Computer Science" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div class="form-group">
+                    <label for="admission_number">Admission Number</label>
+                    <input type="text" id="admission_number" name="admission_number" placeholder="ADM12345" required>
                 </div>
                 <div class="form-group">
-                    <input placeholder="Course" autocomplete="off" type="text" id="course" name="course" class="form-control" required>
+                    <label for="hostel_key">Hostel Key</label>
+                    <div style="position: relative;">
+                        <i data-lucide="key" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.25rem; height: 1.25rem; color: var(--text-muted);"></i>
+                        <input type="text" id="hostel_key" name="hostel_key" placeholder="Enter key" style="padding-left: 3rem;" required>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose username" required>
                 </div>
                 <div class="form-group">
-                    <input placeholder="Admission Number" autocomplete="off" type="text" id="admission_number" name="admission_number" class="form-control" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
                 </div>
-                <div class="form-group">
-                    <input placeholder="Hostel Key" autocomplete="off" type="text" id="hostel_key" name="hostel_key" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <input placeholder="Username" autocomplete="off" type="text" id="username" name="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <input placeholder="Password" autocomplete="off" type="password" id="password" name="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="margin-left: 200px;">Register</button>
-            </form>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                Register as Student
+            </button>
+        </form>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <p style="font-size: 0.875rem; color: var(--text-muted);">Already have an account? <a href="{{ url_for('user.login') }}" style="color: var(--primary); text-decoration: none; font-weight: 600;">Login</a></p>
         </div>
     </div>
 </div>

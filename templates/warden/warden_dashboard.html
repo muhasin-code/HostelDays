@@ -1,38 +1,96 @@
-{% extends "base.html" %}
-{% block title %}Warden Dashboard{% endblock %}
-{% block content %}
-    <h1 style="margin-top: 150px; font-weight: bold; color: blue; margin-left: 270px;">Warden Dashboard</h1>
+{% extends "dashboard_base.html" %}
 
-    <div class="container mt-5" style="justify-content: flex-start;">
-        <div class="row">
-            <div class="col-md-4">
-                <a href="{{ url_for('warden.view_fees') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Fees Calculation</button></a>
-            </div>
+{% block title %}Warden Dashboard - HostelDays{% endblock %}
 
-            <div class="col-md-4">
-                <a href="{{ url_for('warden.approval_requests') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Approval Requests</button></a>
-            </div>
+{% block sidebar_nav %}
+<a href="{{ url_for('warden.dashboard') }}" class="nav-link active">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('warden.manage_students') }}" class="nav-link">
+    <i data-lucide="users"></i>
+    Students List
+</a>
+<a href="{{ url_for('warden.approval_requests') }}" class="nav-link">
+    <i data-lucide="user-plus"></i>
+    Approval Requests
+</a>
+<a href="{{ url_for('warden.view_attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Attendance List
+</a>
+<a href="{{ url_for('warden.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    Fees Calculation
+</a>
+<a href="{{ url_for('warden.view_complaints') }}" class="nav-link">
+    <i data-lucide="message-square-warning"></i>
+    Complaints
+</a>
+<a href="{{ url_for('warden.make_announcement') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+{% endblock %}
 
-            <div class="col-md-4">
-                <a href="{{ url_for('warden.view_complaints') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">View Complaints</button></a>
+{% block page_title %}Warden Dashboard{% endblock %}
+{% block page_subtitle %}Manage your hostel operations and student requests.{% endblock %}
+
+{% block dashboard_content %}
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+    <div class="card glass" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+            <div style="background: rgba(79, 70, 229, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                <i data-lucide="user-plus"></i>
             </div>
+            <span style="font-size: 0.75rem; font-weight: 600; color: #f59e0b; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.75rem; border-radius: 1rem;">Pending</span>
         </div>
-
-        <div class="row" style="padding-top: 30px;">
-            <div class="col-md-4">
-                <a href="{{ url_for('warden.manage_students') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Students List</button></a>
-            </div>
-
-            <div class="col-md-4">
-                <a href="{{ url_for('warden.view_attendance') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Attendance List</button></a>
-            </div>
-
-            <div class="col-md-4">
-                <a href="{{ url_for('warden.make_announcement') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Make Announcements</button></a>
-            </div>
-        </div>
-
-        <a href="{{ url_for('user.logout') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px; margin-left: 370px; margin-top: 30px;">Logout</button></a>
+        <h3 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Approval Requests</h3>
+        <p style="font-size: 2rem; font-weight: 800;">Action Needed</p>
+        <a href="{{ url_for('warden.approval_requests') }}" style="margin-top: 1.5rem; display: block; text-decoration: none; color: var(--primary); font-size: 0.875rem; font-weight: 600;">View all requests →</a>
     </div>
 
+    <div class="card glass" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+            <div style="background: rgba(16, 185, 129, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                <i data-lucide="message-square"></i>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 600; color: var(--accent); background: rgba(16, 185, 129, 0.1); padding: 0.25rem 0.75rem; border-radius: 1rem;">Active</span>
+        </div>
+        <h3 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Recent Complaints</h3>
+        <p style="font-size: 2rem; font-weight: 800;">Stay Updated</p>
+        <a href="{{ url_for('warden.view_complaints') }}" style="margin-top: 1.5rem; display: block; text-decoration: none; color: var(--primary); font-size: 0.875rem; font-weight: 600;">View complaints →</a>
+    </div>
+
+    <div class="card glass" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+            <div style="background: rgba(100, 116, 139, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: var(--secondary);">
+                <i data-lucide="megaphone"></i>
+            </div>
+        </div>
+        <h3 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Hostel Broadcast</h3>
+        <p style="font-size: 2rem; font-weight: 800;">Announcements</p>
+        <a href="{{ url_for('warden.make_announcement') }}" style="margin-top: 1.5rem; display: block; text-decoration: none; color: var(--primary); font-size: 0.875rem; font-weight: 600;">Post announcement →</a>
+    </div>
+</div>
+
+<div class="card glass" style="margin-top: 2rem; padding: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 0;">Quick Actions</h3>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <a href="{{ url_for('warden.manage_students') }}" class="btn btn-outline" style="justify-content: flex-start; padding: 1rem;">
+            <i data-lucide="users" style="width: 1.25rem;"></i>
+            Manage Students
+        </a>
+        <a href="{{ url_for('warden.view_attendance') }}" class="btn btn-outline" style="justify-content: flex-start; padding: 1rem;">
+            <i data-lucide="calendar-check" style="width: 1.25rem;"></i>
+            View Attendance
+        </a>
+        <a href="{{ url_for('warden.view_fees') }}" class="btn btn-outline" style="justify-content: flex-start; padding: 1rem;">
+            <i data-lucide="banknote" style="width: 1.25rem;"></i>
+            Calculate Fees
+        </a>
+    </div>
+</div>
 {% endblock %}

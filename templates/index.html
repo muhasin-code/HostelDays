@@ -1,32 +1,55 @@
 {% extends "base.html" %}
-{% block title %}HostelDays{% endblock %}
+{% block title %}HostelDays - Seamless Management{% endblock %}
+
 {% block content %}
-<div class="container-fluid">
-    <div class="row align-items-center">
-        <!-- Left side with the hostel image -->
-        <div class="col-md-6 position-relative">
-            <h1 class="display-4 font-weight-bold text-primary position-left" style="top: 20px; left: 20px;">Hostel Days</h1>
-            <img src="{{ url_for('static', filename='images/hostel_image.png') }}" alt="Hostel Image" class="img-fluid">
+<section class="hero">
+    <div class="glass" style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem; border-radius: 2rem;">
+        <div style="display: flex; gap: 0.5rem; justify-content: center; align-items: center; margin-bottom: 2rem; color: var(--primary);">
+            <i data-lucide="home" style="width: 2rem; height: 2rem;"></i>
+            <span style="font-weight: 800; font-size: 1.5rem; letter-spacing: -0.025em;">HostelDays</span>
+        </div>
+        
+        <h1>Welcome To Hostel Days</h1>
+        <p class="lead" style="max-width: 600px; margin: 0 auto 3rem; color: var(--text-muted); font-size: 1.125rem;">
+            Experience efficient, organized, and hassle-free hostel management. 
+            Connect students, wardens, and administrators in one seamless platform.
+        </p>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4rem;">
+            <a href="{{ url_for('user.login') }}" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.125rem;">
+                <i data-lucide="log-in" style="width: 1.25rem; height: 1.25rem;"></i>
+                Get Started
+            </a>
+            <a href="{{ url_for('user.register_hostel') }}" class="btn btn-outline" style="padding: 1rem 2rem;">
+                Register Hostel
+            </a>
         </div>
 
-        <!-- Right side with the text and login button -->
-        <div class="col-md-6 text-left">
-            <nav class="nav justify-content-end">
-                <a class="nav-link" href="{{ url_for('user.register_warden') }}">Warden</a>
-                <a class="nav-link" href="{{ url_for('user.register_hostel') }}">Hostel</a>
-                <a class="nav-link" href="{{ url_for('user.register_student') }}">Student</a>
-            </nav>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: left;">
+            <a href="{{ url_for('user.register_student') }}" class="card glass nav-link" style="padding: 1.5rem; transition: transform 0.2s;">
+                <div style="background: rgba(79, 70, 229, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--primary);">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">For Students</h3>
+                <p style="font-size: 0.875rem; color: var(--text-muted);">Join your hostel community and manage your stay.</p>
+            </a>
 
-            <h1 class="display-4 font-weight-bold mt-5">Welcome To,</h1>
-            <h1 class="display-2 font-weight-bold text-primary">Hostel Days</h1>
-            <p class="lead">
-                Discover a seamless way to manage hostel life with Hostel Days. Whether you're a student looking to secure your place, 
-                a warden managing approvals and announcements, or a hostel administrator overseeing the day-to-day operations, 
-                our platform offers an easy-to-use interface designed to simplify every step of the process. 
-                Join us and experience efficient, organized, and hassle-free hostel management like never before.
-            </p>            
-            <a href="{{ url_for('user.login') }}" class="btn btn-primary btn-lg mt-3">Log In</a>
+            <a href="{{ url_for('user.register_warden') }}" class="card glass nav-link" style="padding: 1.5rem; transition: transform 0.2s;">
+                <div style="background: rgba(16, 185, 129, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--accent);">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">For Wardens</h3>
+                <p style="font-size: 0.875rem; color: var(--text-muted);">Manage approvals, announcements, and operations.</p>
+            </a>
+
+            <div class="card glass" style="padding: 1.5rem; opacity: 0.8;">
+                <div style="background: rgba(100, 116, 139, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--secondary);">
+                    <i data-lucide="layout"></i>
+                </div>
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Admin Panel</h3>
+                <p style="font-size: 0.875rem; color: var(--text-muted);">Complete oversight of hostel activities.</p>
+            </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

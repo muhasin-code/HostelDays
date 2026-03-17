@@ -1,6 +1,56 @@
-{% extends "base.html" %}
-{% block title %}Attendance Error{% endblock %}
-{% block content %}
-    <h1 style="margin-left: 350px; color: red;">Attendance Error</h1>
-    <p>You have already registered the attendance for tomorrow or you are trying to mark the attendance outside the allowed time frame (5 PM to 9 PM).</p>
+{% extends "dashboard_base.html" %}
+
+{% block title %}Attendance Error - HostelDays{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('student.student_dashboard') }}" class="nav-link">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('student.attendance') }}" class="nav-link active">
+    <i data-lucide="calendar-check"></i>
+    Mark Attendance
+</a>
+<a href="{{ url_for('student.view_announcements') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+<a href="{{ url_for('student.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    My Fees
+</a>
+<a href="{{ url_for('student.register_complaint') }}" class="nav-link">
+    <i data-lucide="message-square-plus"></i>
+    New Complaint
+</a>
+{% endblock %}
+
+{% block page_title %}Unable to Mark Attendance{% endblock %}
+
+{% block dashboard_content %}
+<div style="min-height: 50vh; display: flex; align-items: center; justify-content: center;">
+    <div class="card glass" style="max-width: 500px; width: 100%; padding: 3rem; text-align: center; border-color: rgba(239, 68, 68, 0.2);">
+        <div style="background: rgba(239, 68, 68, 0.1); width: 4rem; height: 4rem; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: #ef4444;">
+            <i data-lucide="alert-circle" style="width: 2rem; height: 2rem;"></i>
+        </div>
+        <h2 style="margin-bottom: 1.5rem;">Access Restricted</h2>
+        <div style="color: var(--text-muted); line-height: 1.6; margin-bottom: 2.5rem;">
+            <p>You may see this error if:</p>
+            <ul style="text-align: left; list-style: none; padding: 1rem 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                <li style="display: flex; gap: 0.5rem; align-items: start;">
+                    <i data-lucide="check" style="width: 1.125rem; color: #ef4444; flex-shrink: 0;"></i>
+                    <span>You have already registered your attendance for tomorrow.</span>
+                </li>
+                <li style="display: flex; gap: 0.5rem; align-items: start;">
+                    <i data-lucide="check" style="width: 1.125rem; color: #ef4444; flex-shrink: 0;"></i>
+                    <span>You are outside the allowed time frame (5 PM to 9 PM).</span>
+                </li>
+            </ul>
+        </div>
+        
+        <a href="{{ url_for('student.student_dashboard') }}" class="btn btn-primary" style="width: 100%;">
+            Return to Dashboard
+        </a>
+    </div>
+</div>
 {% endblock %}

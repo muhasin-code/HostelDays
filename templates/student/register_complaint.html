@@ -1,12 +1,53 @@
-{% extends "base.html" %}
-{% block title %}Register Complaint{% endblock %}
-{% block content %}
-    <h1>Register Complaint</h1>
+{% extends "dashboard_base.html" %}
+
+{% block title %}Register Complaint - HostelDays{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('student.student_dashboard') }}" class="nav-link">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('student.attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Mark Attendance
+</a>
+<a href="{{ url_for('student.view_announcements') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+<a href="{{ url_for('student.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    My Fees
+</a>
+<a href="{{ url_for('student.register_complaint') }}" class="nav-link active">
+    <i data-lucide="message-square-plus"></i>
+    New Complaint
+</a>
+{% endblock %}
+
+{% block page_title %}Report an Issue{% endblock %}
+{% block page_subtitle %}Found a problem? Let the hostel management know so we can fix it promptly.{% endblock %}
+
+{% block dashboard_content %}
+<div class="card glass" style="max-width: 700px;">
     <form method="post">
         <div class="form-group">
-            <label for="complaint">Complaint:</label>
-            <textarea id="complaint" name="complaint" class="form-control" required></textarea>
+            <label for="complaint">Describe the issue</label>
+            <textarea id="complaint" name="complaint" rows="8" placeholder="Please provide details about the maintenance issue or complaint..." style="resize: vertical;" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        
+        <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 0.75rem; padding: 1rem; margin-bottom: 2rem; display: flex; gap: 0.75rem; align-items: center;">
+            <i data-lucide="alert-triangle" style="color: #f59e0b; width: 1.25rem;"></i>
+            <p style="font-size: 0.875rem; color: #b45309; margin: 0;">Your complaint will be sent directly to the warden's dashboard for review.</p>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+            <a href="{{ url_for('student.student_dashboard') }}" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary" style="padding: 0.75rem 2.5rem;">
+                <i data-lucide="send"></i>
+                Submit Complaint
+            </button>
+        </div>
     </form>
+</div>
 {% endblock %}

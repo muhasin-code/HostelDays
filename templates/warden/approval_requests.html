@@ -1,30 +1,88 @@
-{% extends "base.html" %}
-{% block title %}Approval Requests{% endblock %}
-{% block content %}
-    <h1>Approval Requests</h1>
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Student Name</th>
-                <th>Admission Number</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for request in approval_requests %}
-            <tr>
-                <td>{{ request.name }}</td>
-                <td>{{ request.admission_number }}</td>
-                <td>
-                    <form method="POST" action="{{ url_for('warden.approve_request', request_id=request.id) }}">
-                        <button type="submit" class="btn btn-success">Approve</button>
-                    </form>
-                    <form method="POST" action="{{ url_for('warden.deny_request', request_id=request.id) }}">
-                        <button type="submit" class="btn btn-danger">Deny</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% extends "dashboard_base.html" %}
+
+{% block title %}Approval Requests - HostelDays{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('warden.dashboard') }}" class="nav-link">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('warden.manage_students') }}" class="nav-link">
+    <i data-lucide="users"></i>
+    Students List
+</a>
+<a href="{{ url_for('warden.approval_requests') }}" class="nav-link active">
+    <i data-lucide="user-plus"></i>
+    Approval Requests
+</a>
+<a href="{{ url_for('warden.view_attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Attendance List
+</a>
+<a href="{{ url_for('warden.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    Fees Calculation
+</a>
+<a href="{{ url_for('warden.view_complaints') }}" class="nav-link">
+    <i data-lucide="message-square-warning"></i>
+    Complaints
+</a>
+<a href="{{ url_for('warden.make_announcement') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+{% endblock %}
+
+{% block page_title %}Approval Requests{% endblock %}
+{% block page_subtitle %}Review and approve new student registrations.{% endblock %}
+
+{% block dashboard_content %}
+<div class="card glass">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Admission Number</th>
+                    <th>Age</th>
+                    <th>Course</th>
+                    <th style="text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in approval_requests %}
+                <tr>
+                    <td style="font-weight: 600;">{{ request.name }}</td>
+                    <td style="color: var(--text-muted); font-family: monospace;">{{ request.admission_number }}</td>
+                    <td>{{ request.age }}</td>
+                    <td>{{ request.course }}</td>
+                    <td style="text-align: right;">
+                        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                            <form method="POST" action="{{ url_for('warden.approve_request', request_id=request.id) }}">
+                                <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem; background: var(--accent);">
+                                    <i data-lucide="check" style="width: 1rem;"></i>
+                                    Approve
+                                </button>
+                            </form>
+                            <form method="POST" action="{{ url_for('warden.deny_request', request_id=request.id) }}">
+                                <button type="submit" class="btn btn-outline" style="padding: 0.5rem 1rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">
+                                    <i data-lucide="x" style="width: 1rem;"></i>
+                                    Deny
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                        <i data-lucide="user-plus" style="width: 3rem; height: 3rem; margin-bottom: 1rem; opacity: 0.2;"></i>
+                        <p>No pending approval requests.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

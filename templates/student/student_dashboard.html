@@ -1,29 +1,78 @@
-{% extends "base.html" %}
-{% block title %}Student Dashboard{% endblock %}
-{% block content %}
-    <h1 style="margin-top: 150px; font-weight: bold; color: blue; margin-left: 170px;">Student Dashboard</h1>
+{% extends "dashboard_base.html" %}
 
-    <div class="container mt-5" style="justify-content: flex-start;">
-        <div class="row">
-            <div class="col-md-6">
-                <a href="{{ url_for('student.attendance') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Mark Attendance</button></a>
-            </div>
+{% block title %}Student Dashboard - HostelDays{% endblock %}
 
-            <div class="col-md-6">
-                <a href="{{ url_for('student.view_announcements') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">View Announcements</button></a>
+{% block sidebar_nav %}
+<a href="{{ url_for('student.student_dashboard') }}" class="nav-link active">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('student.attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Mark Attendance
+</a>
+<a href="{{ url_for('student.view_announcements') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+<a href="{{ url_for('student.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    My Fees
+</a>
+<a href="{{ url_for('student.register_complaint') }}" class="nav-link">
+    <i data-lucide="message-square-plus"></i>
+    New Complaint
+</a>
+{% endblock %}
+
+{% block page_title %}Student Dashboard{% endblock %}
+{% block page_subtitle %}Manage your stay and stay updated with hostel news.{% endblock %}
+
+{% block dashboard_content %}
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+    <div class="card glass" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+            <div style="background: rgba(79, 70, 229, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                <i data-lucide="calendar-check"></i>
             </div>
         </div>
-
-        <div class="row" style="padding-top: 30px;">
-            <div class="col-md-6">
-                <a href="{{ url_for('student.view_fees') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">View Fees</button></a>
-            </div>
-
-            <div class="col-md-6">
-                <a href="{{ url_for('student.register_complaint') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px;">Register Complaints</button></a>
-            </div>
-        </div>
-        
-        <a href="{{ url_for('user.logout') }}"><button style="width: 100px; padding-top: 15px; padding-bottom: 15px; font-weight: bold; background-color: rgb(1, 1, 155); color: white; border-radius: 10px; border-width: 0px; margin-left: 270px; margin-top: 30px;">Logout</button></a>
+        <h3 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Attendance</h3>
+        <p style="font-size: 2rem; font-weight: 800;">Stay Present</p>
+        <a href="{{ url_for('student.attendance') }}" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Mark Presence</a>
     </div>
+
+    <div class="card glass" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+            <div style="background: rgba(16, 185, 129, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                <i data-lucide="banknote"></i>
+            </div>
+        </div>
+        <h3 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Mess & Rent</h3>
+        <p style="font-size: 2rem; font-weight: 800;">View Fees</p>
+        <a href="{{ url_for('student.view_fees') }}" style="margin-top: 1.5rem; display: block; text-decoration: none; color: var(--primary); font-size: 0.875rem; font-weight: 600;">Check details →</a>
+    </div>
+
+    <div class="card glass" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
+            <div style="background: rgba(100, 116, 139, 0.1); width: 3rem; height: 3rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: var(--secondary);">
+                <i data-lucide="megaphone"></i>
+            </div>
+        </div>
+        <h3 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Latest News</h3>
+        <p style="font-size: 2rem; font-weight: 800;">Announcements</p>
+        <a href="{{ url_for('student.view_announcements') }}" style="margin-top: 1.5rem; display: block; text-decoration: none; color: var(--primary); font-size: 0.875rem; font-weight: 600;">Read news →</a>
+    </div>
+</div>
+
+<div class="card glass" style="margin-top: 2rem; padding: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 0;">Quick Actions</h3>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <a href="{{ url_for('student.register_complaint') }}" class="btn btn-outline" style="justify-content: flex-start; padding: 1rem;">
+            <i data-lucide="message-square-plus" style="width: 1.25rem;"></i>
+            Report an Issue
+        </a>
+    </div>
+</div>
 {% endblock %}

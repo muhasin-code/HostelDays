@@ -1,23 +1,67 @@
-{% extends "base.html" %}
-{% block title %}View Complaints{% endblock %}
-{% block content %}
-    <h1>Complaints</h1>
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Complaint</th>
-                <th>Date</th>
-                <th>Student Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for complaint in complaints %}
-            <tr>
-                <td>{{ complaint.complaint_text }}</td>
-                <td>{{ complaint.date }}</td>
-                <td>{{ complaint.student_name }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% extends "dashboard_base.html" %}
+
+{% block title %}Student Complaints - HostelDays{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('warden.dashboard') }}" class="nav-link">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('warden.manage_students') }}" class="nav-link">
+    <i data-lucide="users"></i>
+    Students List
+</a>
+<a href="{{ url_for('warden.approval_requests') }}" class="nav-link">
+    <i data-lucide="user-plus"></i>
+    Approval Requests
+</a>
+<a href="{{ url_for('warden.view_attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Attendance List
+</a>
+<a href="{{ url_for('warden.view_fees') }}" class="nav-link">
+    <i data-lucide="banknote"></i>
+    Fees Calculation
+</a>
+<a href="{{ url_for('warden.view_complaints') }}" class="nav-link active">
+    <i data-lucide="message-square-warning"></i>
+    Complaints
+</a>
+<a href="{{ url_for('warden.make_announcement') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+{% endblock %}
+
+{% block page_title %}Complaints{% endblock %}
+{% block page_subtitle %}Review and address issues reported by students.{% endblock %}
+
+{% block dashboard_content %}
+<div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+    {% for complaint in complaints %}
+    <div class="card glass" style="padding: 1.5rem; border-left: 4px solid #ef4444;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+            <div>
+                <h3 style="font-size: 1.125rem; margin-bottom: 0.25rem;">{{ complaint.student_name }}</h3>
+                <p style="font-size: 0.875rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="calendar" style="width: 1rem;"></i>
+                    {{ complaint.date }}
+                </p>
+            </div>
+            <span style="font-size: 0.75rem; font-weight: 600; color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 0.25rem 0.75rem; border-radius: 1rem;">Unresolved</span>
+        </div>
+        <p style="font-size: 1rem; line-height: 1.6; color: var(--text);">{{ complaint.complaint_text }}</p>
+        
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Mark as Resolved</button>
+            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Contact Student</button>
+        </div>
+    </div>
+    {% else %}
+    <div class="card glass" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+        <i data-lucide="check-circle-2" style="width: 3rem; height: 3rem; margin-bottom: 1rem; opacity: 0.2; color: var(--accent);"></i>
+        <p>No active complaints. Everything looks good!</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

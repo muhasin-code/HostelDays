@@ -1,42 +1,111 @@
-{% extends "base.html" %}
-{% block title %}View Fees{% endblock %}
-{% block content %}
-    <h1>View Fees</h1>
-    {% if show_fee_update_form %}
-    <form method="POST" action="{{ url_for('warden.view_fees') }}">
-        <div class="form-group">
-            <label for="room_rent">Room Rent:</label>
-            <input type="number" id="room_rent" name="room_rent" value="{{ room_rent }}" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="maintenance_cost">Maintenance Cost:</label>
-            <input type="number" id="maintenance_cost" name="maintenance_cost" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="max_mess_fees">Max Mess Fees:</label>
-            <input type="number" id="max_mess_fees" name="max_mess_fees" value="{{ max_mess_fees }}" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Update Fees</button>
-    </form>
-    {% endif %}
+{% extends "dashboard_base.html" %}
 
-    <h2>Fees Due for Students for the month of {{ previous_month }}</h2>
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Admission Number</th>
-                <th>Total Fee Due</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in students_fees %}
+{% block title %}Fees Management - HostelDays{% endblock %}
+
+{% block sidebar_nav %}
+<a href="{{ url_for('warden.dashboard') }}" class="nav-link">
+    <i data-lucide="layout-dashboard"></i>
+    Dashboard
+</a>
+<a href="{{ url_for('warden.manage_students') }}" class="nav-link">
+    <i data-lucide="users"></i>
+    Students List
+</a>
+<a href="{{ url_for('warden.approval_requests') }}" class="nav-link">
+    <i data-lucide="user-plus"></i>
+    Approval Requests
+</a>
+<a href="{{ url_for('warden.view_attendance') }}" class="nav-link">
+    <i data-lucide="calendar-check"></i>
+    Attendance List
+</a>
+<a href="{{ url_for('warden.view_fees') }}" class="nav-link active">
+    <i data-lucide="banknote"></i>
+    Fees Calculation
+</a>
+<a href="{{ url_for('warden.view_complaints') }}" class="nav-link">
+    <i data-lucide="message-square-warning"></i>
+    Complaints
+</a>
+<a href="{{ url_for('warden.make_announcement') }}" class="nav-link">
+    <i data-lucide="megaphone"></i>
+    Announcements
+</a>
+{% endblock %}
+
+{% block page_title %}Fees Management{% endblock %}
+{% block page_subtitle %}Review student dues for {{ previous_month }} and update hostel rates.{% endblock %}
+
+{% block dashboard_content %}
+{% if show_fee_update_form %}
+<div class="card glass" style="margin-bottom: 2rem; border-color: rgba(79, 70, 229, 0.2);">
+    <h3 style="margin-bottom: 1.5rem;">Update Rates for Current Month</h3>
+    <form method="POST" action="{{ url_for('warden.view_fees') }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div class="form-group">
+                <label for="room_rent">Monthly Room Rent</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(--text-muted);">₹</span>
+                    <input type="number" id="room_rent" name="room_rent" value="{{ room_rent }}" style="padding-left: 2rem;" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="maintenance_cost">Total Maintenance Cost</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(--text-muted);">₹</span>
+                    <input type="number" id="maintenance_cost" name="maintenance_cost" style="padding-left: 2rem;" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="max_mess_fees">Max Mess Fees</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(--text-muted);">₹</span>
+                    <input type="number" id="max_mess_fees" name="max_mess_fees" value="{{ max_mess_fees }}" style="padding-left: 2rem;" required>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+            <i data-lucide="refresh-cw" style="width: 1rem;"></i>
+            Update Rates & Recalculate
+        </button>
+    </form>
+</div>
+{% endif %}
+
+<div class="card glass">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 0;">Student Dues ({{ previous_month }})</h3>
+        <span style="font-size: 0.875rem; color: var(--text-muted); background: var(--background); padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+            Auto-calculated based on attendance
+        </span>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ student.name }}</td>
-                    <td>{{ student.admission_number }}</td>
-                    <td>{{ student.total_fee_due }}</td>
+                    <th>Student Name</th>
+                    <th>Admission Number</th>
+                    <th style="text-align: right;">Total Fee Due</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for student in students_fees %}
+                <tr>
+                    <td style="font-weight: 600;">{{ student.name }}</td>
+                    <td style="color: var(--text-muted); font-family: monospace;">{{ student.admission_number }}</td>
+                    <td style="text-align: right; font-weight: 700; color: var(--primary);">₹{{ "%.2f"|format(student.total_fee_due) }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                        <i data-lucide="banknote" style="width: 3rem; height: 3rem; margin-bottom: 1rem; opacity: 0.2;"></i>
+                        <p>No fee records available for this month.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
