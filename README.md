@@ -10,6 +10,15 @@ HostelDays is a comprehensive web application designed to streamline hostel oper
 
 ---
 
+> 📚 **Academic Project** — Built as a minor project for the BSc Computer Science
+> curriculum at the University of Kerala (2023). Demonstrates full-stack web development
+> with Flask, role-based access control, and domain-driven feature design.
+```
+
+**2. Fix the `schema.sql` — it's actually a strength, highlight it.** Most student Flask projects don't include a proper SQL schema file. Add a mention of it in the project structure section:
+```
+├── schema.sql              # Full database schema — initialize with flask init-db
+
 ## ✨ Features
 
 ### 🛡️ Warden Management
@@ -117,5 +126,12 @@ HostelDays/
 - **Fonts**: Inter (Google Fonts)
 
 ---
+
+## 🔄 If I Were Building This Today
+
+- Replace SQLite with PostgreSQL for concurrent access
+- Add proper session management and CSRF protection
+- Deploy with Gunicorn + Nginx (as done in RoboStock)
+- Add unit tests for fee calculation logic
 
 _Created with ❤️ for better hostel management._
